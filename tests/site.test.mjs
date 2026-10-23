@@ -9,7 +9,7 @@ const base = process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${
 const site = new URL(process.env.SITE_URL || `https://${owner}.github.io`).origin;
 async function walk(dir) { return (await Promise.all((await readdir(dir, { withFileTypes: true })).map(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : path.join(dir, entry.name)))).flat(); }
 const files = await walk(dist);
-const htmlFiles = files.filter(f => f.endsWith('.html'));
+const htmlFiles = files.filter(f => f.endsWith('.html') && !path.relative(dist, f).startsWith(`admin${path.sep}`));
 const html = await Promise.all(htmlFiles.map(async f => [f, await readFile(f, 'utf8')]));
 test('all 20 language routes and custom 404 are built with unique metadata', () => {
   assert.equal(htmlFiles.length, 21);

@@ -3,22 +3,30 @@ import { getImage } from 'astro:assets';
 import Photo from '../ui/Photo.astro';
 import MediaViewer from '../ui/MediaViewer.astro';
 import PageHeading from '../ui/PageHeading.astro';
-import { copy, services } from '../../data/site';
-import { images, type ImageName } from '../../data/images';
+import { copy, gallery } from '../../data/site';
+import { imageSource, videoUrl } from '../../lib/media';
 import type { Language } from '../../lib/routes';
 interface Props { lang: Language }
 const { lang } = Astro.props;
 const c = copy[lang];
-const photos: { name: ImageName; title: string }[] = [
-  { name: 'steel', title: lang === 'mk' ? 'Челични конструкции' : 'Steel structures' },
-  { name: 'machining', title: lang === 'mk' ? 'Прецизна машинска обработка' : 'Precision machining' },
-  ...services.map(s => ({ name: s.image, title: s[lang].title })),
-  { name: 'workshop', title: lang === 'mk' ? 'Производствена работилница' : 'Production workshop' },
-];
-const fullImages = await Promise.all(photos.map(p => getImage({ src: images[p.name], format: 'webp', quality: 90 })));
+const fullImages = await Promise.all(gallery.map(item => getImage({ src: imageSource(item.image), format: 'webp', quality: 90 })));
+const allIllustrative = gallery.length > 0 && gallery.every(item => item.illustrative);
 ---
 <div class="container standard-page">
-  <PageHeading eyebrow={`HERAL METAL / ${c.projects}`} title={c.projectsTitle} description={c.projectsIntro}><p class="image-disclosure">{c.illustrative}</p></PageHeading>
-  <section class="project-grid" data-media-modal="project-viewer" aria-label={c.projects}>{photos.map((photo, i) => <figure><button type="button" class="gallery-trigger media-trigger" data-gallery-index={i} data-kind="image" data-src={fullImages[i]?.src} data-title={photo.title} data-description={c.illustrative} aria-label={`${c.viewImage} — ${photo.title}`}><Photo name={photo.name} alt={photo.title} /><span class="photo-expand" aria-hidden="true">↗</span></button><figcaption><span class="index">0{i + 1}</span><h2>{photo.title}</h2></figcaption></figure>)}</section>
+  <PageHeading eyebrow={`HERAL METAL / ${c.projects}`} title={c.projectsTitle} description={c.projectsIntro}>{allIllustrative && <p class="image-disclosure">{c.illustrative}</p>}</PageHeading>
+  <section class="project-grid" data-media-modal="project-viewer" aria-label={c.projects}>
+    {gallery.map((item, i) => {
+      const title = item[lang].title;
+      const description = [item[lang].description, item.illustrative ? c.illustrative : ''].filter(Boolean).join(' ');
+      return <figure>
+        <button type="button" class="gallery-trigger media-trigger" data-gallery-index={i} data-kind={item.kind} data-src={item.kind === 'video' ? videoUrl(item.video || '') : fullImages[i]?.src} data-poster={fullImages[i]?.src} data-title={title} data-description={description} aria-label={`${item.kind === 'video' ? (lang === 'mk' ? 'Отвори видео' : 'Open video') : c.viewImage} — ${title}`}>
+          <Photo name={item.image} alt={title} />
+          <span class="photo-expand" aria-hidden="true">{item.kind === 'video' ? '▷' : '↗'}</span>
+        </button>
+        <figcaption><span class="index">{String(i + 1).padStart(2, '0')}</span><h2>{title}</h2></figcaption>
+      </figure>;
+    })}
+  </section>
+  {gallery.length === 0 && <p class="page-intro">{lang === 'mk' ? 'Нови фотографии и видеа наскоро.' : 'New photographs and videos coming soon.'}</p>}
 </div>
 <MediaViewer id="project-viewer" lang={lang} />

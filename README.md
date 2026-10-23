@@ -40,9 +40,15 @@ Every content route is also available under `/en/`. `404.html`, `sitemap.xml`, `
 
 ## Quote form
 
-The form submits to Web3Forms using the supplied public access key. `PUBLIC_WEB3FORMS_KEY` can override it at build time; this is a browser identifier, not a secret. The access key's associated email determines delivery. The displayed `test@mail.com` address is the user-requested temporary contact and is marked accordingly.
+The form sends requests to FormSubmit at `doriko6256@goldvester.com`. Set `PUBLIC_FORMSUBMIT_RECIPIENT` at build time to override the recipient with another email or an activated FormSubmit token. This is public browser configuration. FormSubmit requires one-time activation from the recipient inbox before it delivers submissions.
 
-Required fields are name, email, service, description and contact consent. Attachments are optional; allowed types are PDF, JPG, PNG and DWG, maximum 5 MB. Web3Forms attachment support requires a Pro subscription. Success is displayed only when the API returns an HTTP success and `success: true`; rejection or network failure preserves input and offers email contact. Native form submission also works without JavaScript. No visitor details are stored in browser local storage.
+Required fields are name, email, service, description and contact consent. Attachments are optional; allowed types are PDF, JPG, PNG and DWG, maximum 5 MB. Text requests use the FormSubmit AJAX endpoint and keep inline feedback. Requests with attachments use the documented native multipart endpoint and continue to FormSubmit for CAPTCHA and confirmation. Native submission also works without JavaScript. No visitor details are stored in browser local storage.
+
+Inline success requires a successful HTTP response and an explicit `success: true` or `success: "true"`. Rejections, malformed responses and network failures preserve the input. The honeypot uses FormSubmit's `_honey` field. Tests intercept submissions and send no real email; activation and inbox delivery remain a manual deployment check.
+
+## Content editor
+
+The Pages CMS setup matches LiftGo, with a branded `/admin/` start page and five editors for gallery media, homepage, services, About Us and contact. Text fields include Macedonian and English. See [CMS.md](CMS.md) for uploads, local validation and the one-time owner setup needed to connect the GitHub App and invite editors.
 
 ## Verification
 

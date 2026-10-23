@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import { images, type ImageName } from '../../data/images';
-interface Props { name: ImageName; alt: string; class?: string; eager?: boolean; widths?: number[]; sizes?: string }
+import { imageSource } from '../../lib/media';
+interface Props { name: string; alt: string; class?: string; eager?: boolean; widths?: number[]; sizes?: string }
 const { name, alt, class: className, eager = false, widths = [400, 800, 1200], sizes = '(max-width: 767px) 100vw, 50vw' } = Astro.props;
+const source = imageSource(name);
 ---
-<Image src={images[name]} alt={alt} format="webp" quality={85} widths={widths.filter(w => w <= images[name].width)} sizes={sizes} class={className} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+<Image src={source} alt={alt} format="webp" quality={85} widths={widths.filter(w => w <= source.width)} sizes={sizes} class={className} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />

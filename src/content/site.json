@@ -1,0 +1,196 @@
+{
+  "home": {
+    "image": "/src/assets/steel-structure.png",
+    "mk": {
+      "tagline": "Од техничко решение до изведба на терен.",
+      "imageAlt": "Челична конструкција во индустриска работилница"
+    },
+    "en": {
+      "tagline": "From technical solutions to on-site execution.",
+      "imageAlt": "Steel structure in an industrial workshop"
+    }
+  },
+  "about": {
+    "mk": {
+      "aboutTitle": "Херал Метал — прецизност, сигурност и долгорочна вредност",
+      "aboutBody": "Херал Метал е компанија основана во 2018 година, специјализирана за метални конструкции, индустриски цевководи, машинско одржување и гасоводни системи. Обезбедуваме квалитетни и сигурни решенија, од техничко планирање и изработка до монтажа на терен, со фокус на прецизноста, професионалноста и долгорочната вредност.",
+      "certificatesTitle": "ISO сертификати — потврда за квалитет, безбедност и заштита на животната средина",
+      "certificatesBody": "Нашите сертификати потврдуваат дека ги почитуваме највисоките стандарди во изработка, безбедност и одржливост во сите фази на проектите."
+    },
+    "en": {
+      "aboutTitle": "Heral Metal — precision, reliability and long-term value",
+      "aboutBody": "Heral Metal was established in 2018 and specializes in metal structures, industrial piping, machine maintenance and gas pipeline systems. We provide quality, reliable solutions, from technical planning and fabrication to on-site installation, with a focus on precision, professionalism and long-term value.",
+      "certificatesTitle": "ISO certificates — quality, safety and environmental protection",
+      "certificatesBody": "Our certificates reflect our commitment to fabrication, safety and sustainability standards throughout our projects."
+    }
+  },
+  "services": {
+    "metal-structures": {
+      "mk": {
+        "title": "Метални конструкции",
+        "short": "Проектирање, изработка и монтажа на челични конструкции.",
+        "description": "Проектирање, изработка и монтажа на челични конструкции за индустриски, комерцијални и инфраструктурни објекти.",
+        "scope": [
+          "Техничко планирање на челични конструкции",
+          "Изработка според проектна документација",
+          "Монтажа на терен"
+        ]
+      },
+      "en": {
+        "title": "Metal structures",
+        "short": "Design, fabrication and installation of steel structures.",
+        "description": "Design, fabrication and installation of steel structures for industrial, commercial and infrastructure facilities.",
+        "scope": [
+          "Technical planning of steel structures",
+          "Fabrication according to project documentation",
+          "On-site installation"
+        ]
+      }
+    },
+    "machine-maintenance": {
+      "mk": {
+        "title": "Машинско одржување",
+        "short": "Сервис, поправки и модернизација на индустриска опрема.",
+        "description": "Сервис, поправки и модернизација на индустриска опрема за сигурна и непрекината работа.",
+        "scope": [
+          "Сервис на индустриска опрема",
+          "Поправка на машински компоненти",
+          "Модернизација според техничките барања"
+        ]
+      },
+      "en": {
+        "title": "Machine maintenance",
+        "short": "Servicing, repairs and modernization of industrial equipment.",
+        "description": "Servicing, repairs and modernization of industrial equipment for reliable, uninterrupted operation.",
+        "scope": [
+          "Industrial equipment servicing",
+          "Machine component repairs",
+          "Modernization according to technical requirements"
+        ]
+      }
+    },
+    "gas-pipelines": {
+      "mk": {
+        "title": "Гасоводни системи",
+        "short": "Проектирање, изведба и одржување на гасоводни инсталации.",
+        "description": "Проектирање, изведба и одржување на индустриски гасоводни системи и инсталации за технички гасови.",
+        "scope": [
+          "Планирање на индустриски цевководи",
+          "Изведба на гасоводни инсталации",
+          "Одржување на системи за технички гасови"
+        ]
+      },
+      "en": {
+        "title": "Gas pipeline systems",
+        "short": "Design, installation and maintenance of gas pipelines.",
+        "description": "Design, installation and maintenance of industrial gas pipelines and technical gas installations.",
+        "scope": [
+          "Industrial piping planning",
+          "Gas pipeline installation",
+          "Technical gas system maintenance"
+        ]
+      }
+    }
+  },
+  "business": {
+    "email": "test@mail.com",
+    "mk": {
+      "note": "Привремена контактна адреса за оваа верзија на веб-страницата."
+    },
+    "en": {
+      "note": "Temporary contact address for this version of the website."
+    }
+  },
+  "gallery": [
+    {
+      "image": "/src/assets/steel-structure.png",
+      "mk": {
+        "title": "Челични конструкции",
+        "description": ""
+      },
+      "en": {
+        "title": "Steel structures",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    },
+    {
+      "image": "/src/assets/machining.png",
+      "mk": {
+        "title": "Прецизна машинска обработка",
+        "description": ""
+      },
+      "en": {
+        "title": "Precision machining",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    },
+    {
+      "image": "/src/assets/connections.png",
+      "mk": {
+        "title": "Метални конструкции",
+        "description": ""
+      },
+      "en": {
+        "title": "Metal structures",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    },
+    {
+      "image": "/src/assets/maintenance.png",
+      "mk": {
+        "title": "Машинско одржување",
+        "description": ""
+      },
+      "en": {
+        "title": "Machine maintenance",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    },
+    {
+      "image": "/src/assets/pipeline.png",
+      "mk": {
+        "title": "Гасоводни системи",
+        "description": ""
+      },
+      "en": {
+        "title": "Gas pipeline systems",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    },
+    {
+      "image": "/src/assets/workshop.png",
+      "mk": {
+        "title": "Производствена работилница",
+        "description": ""
+      },
+      "en": {
+        "title": "Production workshop",
+        "description": ""
+      },
+      "kind": "image",
+      "video": "",
+      "visible": true,
+      "illustrative": true
+    }
+  ]
+}

@@ -1,18 +1,21 @@
 import type { Language, Page } from '../lib/routes';
+import content from './content';
 export const company = 'Heral Metal';
-export const contactEmail = 'test@mail.com';
-// Web3Forms access keys are public client identifiers, not server credentials.
-export const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '7cbbc293-e956-4d05-a8fd-29fe1c8824bc';
+export const contactEmail = content.business.email;
+// FormSubmit recipients are public browser configuration, not private credentials.
+export const formRecipient = import.meta.env.PUBLIC_FORMSUBMIT_RECIPIENT || 'doriko6256@goldvester.com';
+export const formEndpoint = `https://formsubmit.co/${encodeURIComponent(formRecipient)}`;
+export const formAjaxEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(formRecipient)}`;
 export const copy = {
   mk: {
     home: 'Почетна', services: 'Услуги', projects: 'Проекти', about: 'За нас', contact: 'Контакт', quote: 'Побарај понуда', privacy: 'Приватност',
     skip: 'Прескокни до содржината', menu: 'Мени', close: 'Затвори', industry: 'ИНДУСТРИСКИ РЕШЕНИЈА',
-    hero: ['ИНЖЕНЕРСТВО.', 'ИЗРАБОТКА.', 'МОНТАЖА.'], tagline: 'Од техничко решение до изведба на терен.',
+    hero: ['ИНЖЕНЕРСТВО.', 'ИЗРАБОТКА.', 'МОНТАЖА.'], tagline: content.home.mk.tagline,
     expertise: 'Нашата експертиза', precision: 'ПРЕЦИЗНОСТ', value: 'ДОЛГОРОЧНА ВРЕДНОСТ',
-    aboutTitle: 'Херал Метал — прецизност, сигурност и долгорочна вредност',
-    aboutBody: 'Херал Метал е компанија основана во 2018 година, специјализирана за метални конструкции, индустриски цевководи, машинско одржување и гасоводни системи. Обезбедуваме квалитетни и сигурни решенија, од техничко планирање и изработка до монтажа на терен, со фокус на прецизноста, професионалноста и долгорочната вредност.',
-    certificates: 'СЕРТИФИКАТИ', certificatesTitle: 'ISO сертификати — потврда за квалитет, безбедност и заштита на животната средина',
-    certificatesBody: 'Нашите сертификати потврдуваат дека ги почитуваме највисоките стандарди во изработка, безбедност и одржливост во сите фази на проектите.',
+    aboutTitle: content.about.mk.aboutTitle,
+    aboutBody: content.about.mk.aboutBody,
+    certificates: 'СЕРТИФИКАТИ', certificatesTitle: content.about.mk.certificatesTitle,
+    certificatesBody: content.about.mk.certificatesBody,
     quoteHeading: ['ПОБАРАЈТЕ', 'ПОНУДА.'], quoteIntro: 'Кажете ни повеќе за вашиот проект. Ќе подготвиме понуда за изработка, монтажа или сервис според вашите потреби.',
     formEyebrow: 'ФОРМУЛАР ЗА ПОНУДА', formTitle: 'Споделете ги деталите од проектот', formIntro: 'Пополнете ги податоците и приложете ја документацијата за проектот.',
     details: 'Контактни податоци', name: 'Име и презиме', namePlaceholder: 'Внесете го вашето име и презиме', company: 'Компанија', companyPlaceholder: 'Внесете го името на компанијата', email: 'Е-пошта', phone: 'Телефон',
@@ -22,37 +25,40 @@ export const copy = {
     servicesTitle: 'РЕШЕНИЈА ЗА ВАШИОТ ПРОЕКТ.', servicesIntro: 'Од планирање до изработка и монтажа. Разгледајте ја нашата експертиза и споделете ги техничките барања за вашиот проект.', learn: 'Повеќе за услугата', scope: 'Опсег на услугата', process: 'Од барање до реализација',
     steps: ['Споделете ги барањата', 'Техничко разгледување', 'Договорен опсег и изведба'], stepDetails: ['Опишете го проектот, локацијата и потребниот рок. Приложете ја достапната техничка документација.', 'Барањата и документацијата се основа за разгледување на соодветното техничко решение.', 'Понудата го дефинира опсегот на работата. Изработката, монтажата или сервисот се договараат според потребите на проектот.'],
     projectsTitle: 'КОНСТРУКЦИИ. ОПРЕМА. СИСТЕМИ.', projectsIntro: 'Визуелен преглед на областите во кои работиме.', illustrative: 'Илустративни фотографии од дизајнот. Не претставуваат документирани завршени проекти.', viewImage: 'Отвори фотографија', previous: 'Претходна фотографија', next: 'Следна фотографија',
-    contactTitle: 'ДА РАЗГОВАРАМЕ ЗА ВАШИОТ ПРОЕКТ.', contactIntro: 'За изработка, монтажа или сервис, испратете ни ги вашите барања преку формуларот за понуда.', emailUs: 'Пишете ни', emailNote: 'Привремена контактна адреса за оваа верзија на веб-страницата.', ready: 'Имате техничко барање?', readyBody: 'Споделете го опсегот и документацијата за да го започнеме разговорот.',
+    contactTitle: 'ДА РАЗГОВАРАМЕ ЗА ВАШИОТ ПРОЕКТ.', contactIntro: 'За изработка, монтажа или сервис, испратете ни ги вашите барања преку формуларот за понуда.', emailUs: 'Пишете ни', emailNote: content.business.mk.note || '', ready: 'Имате техничко барање?', readyBody: 'Споделете го опсегот и документацијата за да го започнеме разговорот.',
     faq: 'Прашања пред да побарате понуда', questions: ['Кои информации да ги приложам?', 'Може ли да побарам сервис?', 'Како се одредува понудата?'], answers: ['Опишете го обемот, локацијата и рокот. Ако имате скици, спецификации или технички цртежи, приложете ги.', 'Да. Изберете „Машинско одржување“ и опишете ја опремата и потребниот сервис.', 'Понудата се подготвува според конкретните технички барања и договорениот опсег на работата.'],
     privacyTitle: 'Информации за приватност', privacyIntro: 'Како оваа веб-страница ги обработува податоците што ги испраќате преку формуларот.', privacySections: [
       ['Податоци во формуларот', 'Формуларот собира име, е-пошта, избрана услуга, опис на проектот и согласност за контакт. Компанијата, телефонскиот број и документот се незадолжителни. Податоците се користат за комуникација за вашето барање.'],
-      ['Испраќање преку Web3Forms', 'Кога ќе го испратите формуларот, внесените податоци и избраниот документ се испраќаат до Web3Forms за обработка и доставување. Не прикачувајте чувствителни информации што не се потребни за барањето.'],
-      ['Локално чување и следење', 'Оваа веб-страница нема аналитички скрипти или маркетиншки колачиња. Не ги зачувува внесените податоци во локалното складиште на прелистувачот. GitHub Pages и Web3Forms може да обработуваат технички податоци според своите политики.'],
+      ['Испраќање преку FormSubmit', 'Кога ќе го испратите формуларот, внесените податоци и избраниот документ се испраќаат до FormSubmit за обработка и доставување. Не прикачувајте чувствителни информации што не се потребни за барањето.'],
+      ['Локално чување и следење', 'Оваа веб-страница нема аналитички скрипти или маркетиншки колачиња. Не ги зачувува внесените податоци во локалното складиште на прелистувачот. GitHub Pages и FormSubmit може да обработуваат технички податоци според своите политики.'],
       ['Контакт', 'За прашања за вашето барање или податоците, користете ја контактната е-пошта. Контактната адреса е привремена и треба да биде заменета со потврдена деловна адреса пред јавна деловна употреба.'],
     ], notFound: 'Страницата не е пронајдена.', notFoundBody: 'Линкот можеби е променет. Продолжете од почетната страница или разгледајте ги нашите услуги.', backHome: 'Кон почетната',
   },
   en: {
     home: 'Home', services: 'Services', projects: 'Projects', about: 'About', contact: 'Contact', quote: 'Request a quote', privacy: 'Privacy',
-    skip: 'Skip to content', menu: 'Menu', close: 'Close', industry: 'INDUSTRIAL SOLUTIONS', hero: ['ENGINEERING.', 'FABRICATION.', 'INSTALLATION.'], tagline: 'From technical solutions to on-site execution.', expertise: 'Our expertise', precision: 'PRECISION', value: 'LONG-TERM VALUE',
-    aboutTitle: 'Heral Metal — precision, reliability and long-term value', aboutBody: 'Heral Metal was established in 2018 and specializes in metal structures, industrial piping, machine maintenance and gas pipeline systems. We provide quality, reliable solutions, from technical planning and fabrication to on-site installation, with a focus on precision, professionalism and long-term value.',
-    certificates: 'CERTIFICATES', certificatesTitle: 'ISO certificates — quality, safety and environmental protection', certificatesBody: 'Our certificates reflect our commitment to fabrication, safety and sustainability standards throughout our projects.',
+    skip: 'Skip to content', menu: 'Menu', close: 'Close', industry: 'INDUSTRIAL SOLUTIONS', hero: ['ENGINEERING.', 'FABRICATION.', 'INSTALLATION.'], tagline: content.home.en.tagline, expertise: 'Our expertise', precision: 'PRECISION', value: 'LONG-TERM VALUE',
+    aboutTitle: content.about.en.aboutTitle, aboutBody: content.about.en.aboutBody,
+    certificates: 'CERTIFICATES', certificatesTitle: content.about.en.certificatesTitle, certificatesBody: content.about.en.certificatesBody,
     quoteHeading: ['REQUEST', 'A QUOTE.'], quoteIntro: 'Tell us more about your project. We will prepare a quote for fabrication, installation or maintenance based on your requirements.', formEyebrow: 'QUOTE REQUEST FORM', formTitle: 'Share your project details', formIntro: 'Complete your details and attach your project documentation.',
     details: 'Contact details', name: 'Full name', namePlaceholder: 'Enter your full name', company: 'Company', companyPlaceholder: 'Enter your company name', email: 'Email', phone: 'Phone', selectService: 'Choose a service', projectDetails: 'Project details', description: 'Brief project description', descriptionPlaceholder: 'Describe the scope, location, timeline and other important project requirements.', attachments: 'Attached documents', upload: 'Attach a document, sketch or specification', fileHint: 'PDF, JPG, PNG or DWG up to 5 MB', consent: 'I agree to be contacted about this quote request.', submit: 'Send request', sending: 'Sending…', success: 'Your request has been sent successfully.', error: 'Your request was not sent. Please try again or contact us by email.', fileError: 'Choose a PDF, JPG, PNG or DWG document up to 5 MB.', remove: 'Remove document', required: 'Required', optional: 'optional',
     servicesTitle: 'SOLUTIONS FOR YOUR PROJECT.', servicesIntro: 'From planning to fabrication and installation. Explore our expertise and share the technical requirements for your project.', learn: 'Explore the service', scope: 'Service scope', process: 'From requirements to delivery', steps: ['Share your requirements', 'Technical review', 'Agreed scope and execution'], stepDetails: ['Describe the project, location and required timeline. Include any available technical documentation.', 'Your requirements and documentation provide the basis for reviewing the appropriate technical solution.', 'The quote defines the scope of work. Fabrication, installation or maintenance is agreed according to your project requirements.'],
-    projectsTitle: 'STRUCTURES. EQUIPMENT. SYSTEMS.', projectsIntro: 'A visual introduction to the areas we work in.', illustrative: 'Illustrative images supplied in the design. These are not documented completed projects.', viewImage: 'Open photograph', previous: 'Previous photograph', next: 'Next photograph', contactTitle: 'LET’S DISCUSS YOUR PROJECT.', contactIntro: 'For fabrication, installation or maintenance, send us your requirements using the quote request form.', emailUs: 'Email us', emailNote: 'Temporary contact address for this version of the website.', ready: 'Have a technical requirement?', readyBody: 'Share the scope and documentation to start the conversation.',
+    projectsTitle: 'STRUCTURES. EQUIPMENT. SYSTEMS.', projectsIntro: 'A visual introduction to the areas we work in.', illustrative: 'Illustrative images supplied in the design. These are not documented completed projects.', viewImage: 'Open photograph', previous: 'Previous photograph', next: 'Next photograph', contactTitle: 'LET’S DISCUSS YOUR PROJECT.', contactIntro: 'For fabrication, installation or maintenance, send us your requirements using the quote request form.', emailUs: 'Email us', emailNote: content.business.en.note || '', ready: 'Have a technical requirement?', readyBody: 'Share the scope and documentation to start the conversation.',
     faq: 'Before you request a quote', questions: ['What information should I include?', 'Can I request maintenance?', 'How is a quote prepared?'], answers: ['Describe the scope, location and timeline. Include sketches, specifications or technical drawings if available.', 'Yes. Select “Machine maintenance” and describe the equipment and service required.', 'Each quote is prepared according to the specific technical requirements and agreed scope of work.'], privacyTitle: 'Privacy information', privacyIntro: 'How this website processes the information you submit through the form.', privacySections: [
       ['Form information', 'The form collects your name, email, selected service, project description and consent to contact. Company, phone number and document are optional. This information is used to communicate about your request.'],
-      ['Submission through Web3Forms', 'When you submit the form, your details and selected document are sent to Web3Forms for processing and delivery. Please avoid attaching sensitive information that is unnecessary for your request.'],
-      ['Local storage and tracking', 'This website uses no analytics scripts or marketing cookies. It does not save your form details in browser local storage. GitHub Pages and Web3Forms may process technical information according to their own policies.'],
+      ['Submission through FormSubmit', 'When you submit the form, your details and selected document are sent to FormSubmit for processing and delivery. Please avoid attaching sensitive information that is unnecessary for your request.'],
+      ['Local storage and tracking', 'This website uses no analytics scripts or marketing cookies. It does not save your form details in browser local storage. GitHub Pages and FormSubmit may process technical information according to their own policies.'],
       ['Contact', 'Use the contact email for questions about your request or information. This address is temporary and must be replaced with a verified business address before public business use.'],
     ], notFound: 'Page not found.', notFoundBody: 'The link may have changed. Continue from the home page or explore our services.', backHome: 'Back to home',
   },
 };
-export const services = [
-  { id: 'metal-structures', number: '01', image: 'connections', mk: { title: 'Метални конструкции', short: 'Проектирање, изработка и монтажа на челични конструкции.', description: 'Проектирање, изработка и монтажа на челични конструкции за индустриски, комерцијални и инфраструктурни објекти.', scope: ['Техничко планирање на челични конструкции', 'Изработка според проектна документација', 'Монтажа на терен'] }, en: { title: 'Metal structures', short: 'Design, fabrication and installation of steel structures.', description: 'Design, fabrication and installation of steel structures for industrial, commercial and infrastructure facilities.', scope: ['Technical planning of steel structures', 'Fabrication according to project documentation', 'On-site installation'] } },
-  { id: 'machine-maintenance', number: '02', image: 'maintenance', mk: { title: 'Машинско одржување', short: 'Сервис, поправки и модернизација на индустриска опрема.', description: 'Сервис, поправки и модернизација на индустриска опрема за сигурна и непрекината работа.', scope: ['Сервис на индустриска опрема', 'Поправка на машински компоненти', 'Модернизација според техничките барања'] }, en: { title: 'Machine maintenance', short: 'Servicing, repairs and modernization of industrial equipment.', description: 'Servicing, repairs and modernization of industrial equipment for reliable, uninterrupted operation.', scope: ['Industrial equipment servicing', 'Machine component repairs', 'Modernization according to technical requirements'] } },
-  { id: 'gas-pipelines', number: '03', image: 'pipeline', mk: { title: 'Гасоводни системи', short: 'Проектирање, изведба и одржување на гасоводни инсталации.', description: 'Проектирање, изведба и одржување на индустриски гасоводни системи и инсталации за технички гасови.', scope: ['Планирање на индустриски цевководи', 'Изведба на гасоводни инсталации', 'Одржување на системи за технички гасови'] }, en: { title: 'Gas pipeline systems', short: 'Design, installation and maintenance of gas pipelines.', description: 'Design, installation and maintenance of industrial gas pipelines and technical gas installations.', scope: ['Industrial piping planning', 'Gas pipeline installation', 'Technical gas system maintenance'] } },
+const serviceRoutes = [
+  { id: 'metal-structures', number: '01', image: 'connections' },
+  { id: 'machine-maintenance', number: '02', image: 'maintenance' },
+  { id: 'gas-pipelines', number: '03', image: 'pipeline' },
 ] as const;
+export const services = serviceRoutes.map(service => ({ ...service, ...content.services[service.id] }));
+export const gallery = content.gallery.filter(item => item.visible);
+export const homeContent = content.home;
 export const certificates = [
   { image: 'iso-9001', title: 'ISO 9001:2015', mk: 'Управување со квалитет — стандард за систематско планирање, изработка и доставување на услуги.', en: 'Quality management — a standard for systematic planning, fabrication and delivery of services.' },
   { image: 'iso-45001', title: 'ISO 45001:2018', mk: 'Безбедност и здравје при работа — стандард за заштита на вработени и минимизирање ризици на работното место.', en: 'Occupational health and safety — a standard for protecting employees and minimizing workplace risks.' },
@@ -65,7 +71,7 @@ export function metadata(page: Page | '404', lang: Language) {
   const meta = {
     home: { title: `Heral Metal | ${c.industry.toLocaleLowerCase(lang)}`, description: `${c.tagline} ${services.map(s => s[lang].title).join(', ')}.` },
     services: { title: `${c.services} | Heral Metal`, description: c.servicesIntro },
-    projects: { title: `${c.projects} | Heral Metal`, description: `${c.projectsIntro} ${c.illustrative}` },
+    projects: { title: `${c.projects} | Heral Metal`, description: c.projectsIntro },
     about: { title: `${c.about} | Heral Metal`, description: c.aboutBody.slice(0, 190) },
     contact: { title: `${c.contact} | Heral Metal`, description: c.contactIntro },
     quote: { title: `${c.quote} | Heral Metal`, description: c.quoteIntro },

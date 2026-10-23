@@ -1,0 +1,495 @@
+# Keep merge enabled: the small editors share one content file.
+media:
+- name: images
+  label: Фотографии
+  input: src/assets
+  output: /src/assets
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
+  rename: random
+- name: videos
+  label: Видеа
+  input: public/uploads/videos
+  output: /uploads/videos
+  extensions:
+  - mp4
+  rename: random
+content:
+- name: gallery
+  label: 01 · Фотографии и видеа
+  type: file
+  path: src/content/site.json
+  format: json
+  operations:
+    create: false
+    rename: false
+    delete: false
+  fields:
+  - name: gallery
+    label: Галерија
+    type: object
+    list:
+      max: 80
+      collapsible:
+        collapsed: true
+        summary: '{fields.mk.title}'
+    fields:
+    - name: kind
+      label: Вид на содржина
+      type: select
+      required: true
+      default: image
+      options:
+        values:
+        - value: image
+          label: Фотографија
+        - value: video
+          label: Видео
+    - name: image
+      label: Фотографија / насловна фотографија
+      type: image
+      required: true
+      options:
+        media: images
+      description: JPG, PNG или WebP. Препорачано до 2 MB, најмногу 5 MB. За видео, избери насловна фотографија.
+    - name: video
+      label: Видео снимка
+      type: file
+      required: false
+      options:
+        media: videos
+        extensions:
+        - mp4
+      description: 'Само за видео: MP4 до 25 MB, препорачано до 20 MB.'
+    - name: mk
+      label: Македонски
+      type: object
+      fields:
+      - name: title
+        label: Наслов
+        type: string
+        required: true
+        options:
+          maxlength: 100
+      - name: description
+        label: Краток опис
+        type: text
+        required: false
+        options:
+          maxlength: 500
+    - name: en
+      label: English
+      type: object
+      fields:
+      - name: title
+        label: Наслов
+        type: string
+        required: true
+        options:
+          maxlength: 100
+      - name: description
+        label: Краток опис
+        type: text
+        required: false
+        options:
+          maxlength: 500
+    - name: visible
+      label: Прикажи на веб-страницата
+      type: boolean
+      required: true
+      default: true
+    - name: illustrative
+      label: Илустративна содржина
+      type: boolean
+      required: true
+      default: false
+      description: Вклучи за примерни фотографии што не прикажуваат документиран завршен проект.
+- name: home
+  label: 02 · Почетна страница
+  type: file
+  path: src/content/site.json
+  format: json
+  operations:
+    create: false
+    rename: false
+    delete: false
+  fields:
+  - name: home
+    label: Главна фотографија и опис
+    type: object
+    fields:
+    - name: image
+      label: Главна фотографија
+      type: image
+      required: true
+      options:
+        media: images
+      description: JPG, PNG или WebP. Препорачано до 2 MB, најмногу 5 MB.
+    - name: mk
+      label: Македонски
+      type: object
+      fields:
+      - name: tagline
+        label: Краток опис под насловот
+        type: text
+        required: true
+        options:
+          maxlength: 260
+      - name: imageAlt
+        label: Што има на фотографијата?
+        type: text
+        required: true
+        options:
+          maxlength: 180
+    - name: en
+      label: English
+      type: object
+      fields:
+      - name: tagline
+        label: Краток опис под насловот
+        type: text
+        required: true
+        options:
+          maxlength: 260
+      - name: imageAlt
+        label: Што има на фотографијата?
+        type: text
+        required: true
+        options:
+          maxlength: 180
+- name: services
+  label: 03 · Услуги
+  type: file
+  path: src/content/site.json
+  format: json
+  operations:
+    create: false
+    rename: false
+    delete: false
+  fields:
+  - name: services
+    label: Трите услуги
+    type: object
+    fields:
+    - name: metal-structures
+      label: Метални конструкции
+      type: object
+      fields:
+      - name: mk
+        label: Македонски
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+      - name: en
+        label: English
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+    - name: machine-maintenance
+      label: Машинско одржување
+      type: object
+      fields:
+      - name: mk
+        label: Македонски
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+      - name: en
+        label: English
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+    - name: gas-pipelines
+      label: Гасоводни системи
+      type: object
+      fields:
+      - name: mk
+        label: Македонски
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+      - name: en
+        label: English
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 80
+        - name: short
+          label: Краток опис
+          type: text
+          required: true
+          options:
+            maxlength: 220
+        - name: description
+          label: Целосен опис
+          type: text
+          required: true
+          options:
+            maxlength: 600
+        - name: scope
+          label: Опсег на услугата
+          type: string
+          required: true
+          list:
+            min: 3
+            max: 3
+          options:
+            maxlength: 180
+- name: about
+  label: 04 · За нас и сертификати
+  type: file
+  path: src/content/site.json
+  format: json
+  operations:
+    create: false
+    rename: false
+    delete: false
+  fields:
+  - name: about
+    label: За нас
+    type: object
+    fields:
+    - name: mk
+      label: Македонски
+      type: object
+      fields:
+      - name: aboutTitle
+        label: Наслов
+        type: string
+        required: true
+        options:
+          maxlength: 180
+      - name: aboutBody
+        label: Опис на компанијата
+        type: text
+        required: true
+        options:
+          maxlength: 2000
+      - name: certificatesTitle
+        label: Наслов за сертификатите
+        type: string
+        required: true
+        options:
+          maxlength: 200
+      - name: certificatesBody
+        label: Опис за сертификатите
+        type: text
+        required: true
+        options:
+          maxlength: 1000
+    - name: en
+      label: English
+      type: object
+      fields:
+      - name: aboutTitle
+        label: Наслов
+        type: string
+        required: true
+        options:
+          maxlength: 180
+      - name: aboutBody
+        label: Опис на компанијата
+        type: text
+        required: true
+        options:
+          maxlength: 2000
+      - name: certificatesTitle
+        label: Наслов за сертификатите
+        type: string
+        required: true
+        options:
+          maxlength: 200
+      - name: certificatesBody
+        label: Опис за сертификатите
+        type: text
+        required: true
+        options:
+          maxlength: 1000
+- name: contact
+  label: 05 · Контакт
+  type: file
+  path: src/content/site.json
+  format: json
+  operations:
+    create: false
+    rename: false
+    delete: false
+  fields:
+  - name: business
+    label: Контакт
+    type: object
+    fields:
+    - name: email
+      label: Јавна контактна е-пошта
+      type: string
+      required: true
+      pattern:
+        regex: ^[^\s@]+@[^\s@]+\.[^\s@]+$
+        message: Внеси важечка е-пошта.
+      description: Ја менува адресата за контакт на страницата. За промена на примачот на формуларот,
+        побарај помош од одржувачот.
+    - name: mk
+      label: Македонски
+      type: object
+      fields:
+      - name: note
+        label: Напомена под е-поштата
+        type: text
+        required: false
+        options:
+          maxlength: 250
+    - name: en
+      label: English
+      type: object
+      fields:
+      - name: note
+        label: Напомена под е-поштата
+        type: text
+        required: false
+        options:
+          maxlength: 250
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      update: 'content: update {name}'

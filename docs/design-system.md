@@ -76,7 +76,7 @@ Six Figma prototype reactions link logos to Home, About navigation to About, and
 - Language links have at least 24px targets. Mobile inputs use 16px text to avoid automatic viewport zoom.
 - On small mobile screens the hero material note moves beneath the photographs so it remains readable without overlapping the machining inset.
 - The original consent checkbox is visually checked in Figma. Actual consent starts unchecked and must be selected by the visitor.
-- Figma says attachments up to 10 MB; Web3Forms documents a 5 MB standard attachment limit. The interface accurately uses 5 MB. Attachment delivery requires the provider's Pro plan and remains an external configuration prerequisite.
+- The interface accepts PDF, JPG, PNG and DWG attachments up to 5 MB, within FormSubmit’s documented 10 MB combined limit. Attachments use native multipart submission; text requests use AJAX.
 - No company address, telephone, clients, prices, testimonials, project dates or additional certification claims are invented. Company founding and certificate content are carried over from the supplied design and were not independently verified. Gallery photographs are labeled illustrative.
-- `test@mail.com` is the contact address requested by the user; it is identified as temporary. The provided Web3Forms key determines the delivery destination; the displayed email does not configure that destination.
+- The displayed contact email is independent of form delivery. FormSubmit sends to `doriko6256@goldvester.com`, overridable with `PUBLIC_FORMSUBMIT_RECIPIENT`; the recipient must activate the form through their inbox.
 - The footer, mobile layouts and missing pages are new compositions using the extracted visual system.
