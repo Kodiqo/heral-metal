@@ -18,7 +18,7 @@ const { page, lang } = Astro.props;
   {page === 'home' && <Home lang={lang} />}
   {page === 'about' && <About lang={lang} />}
   {(page === 'services' || page.startsWith('services/')) && <Services lang={lang} serviceId={page.split('/')[1]} />}
-  {page === 'projects' && <Projects lang={lang} />}
+  {(page === 'projects' || page.startsWith('projects/')) && <Projects lang={lang} projectSlug={page.split('/')[1]} />}
   {page === 'quote' && <Quote lang={lang} />}
   {page === 'contact' && <Contact lang={lang} />}
   {page === 'privacy' && <Privacy lang={lang} />}

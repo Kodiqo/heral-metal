@@ -57,7 +57,7 @@ const serviceRoutes = [
   { id: 'gas-pipelines', number: '03', image: 'pipeline' },
 ] as const;
 export const services = serviceRoutes.map(service => ({ ...service, ...content.services[service.id] }));
-export const gallery = content.gallery.filter(item => item.visible);
+export const projects = content.projects.filter(project => project.visible);
 export const homeContent = content.home;
 export const certificates = [
   { image: 'iso-9001', title: 'ISO 9001:2015', mk: 'Управување со квалитет — стандард за систематско планирање, изработка и доставување на услуги.', en: 'Quality management — a standard for systematic planning, fabrication and delivery of services.' },
@@ -67,6 +67,8 @@ export const certificates = [
 export function metadata(page: Page | '404', lang: Language) {
   const c = copy[lang];
   const service = services.find(s => page === `services/${s.id}`);
+  const project = projects.find(project => page === `projects/${project.slug}`);
+  if (project) return { title: `${project[lang].title} | ${c.projects} | Heral Metal`, description: project[lang].description || `${project[lang].title}. ${c.projectsIntro}` };
   if (service) return { title: `${service[lang].title} | Heral Metal`, description: service[lang].description };
   const meta = {
     home: { title: `Heral Metal | ${c.industry.toLocaleLowerCase(lang)}`, description: `${c.tagline} ${services.map(s => s[lang].title).join(', ')}.` },

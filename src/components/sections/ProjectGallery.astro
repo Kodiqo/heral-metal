@@ -1,0 +1,29 @@
+---
+import { getImage } from 'astro:assets';
+import Photo from '../ui/Photo.astro';
+import MediaViewer from '../ui/MediaViewer.astro';
+import { copy } from '../../data/site';
+import type { GalleryMedia } from '../../data/content';
+import { imageSource, videoUrl } from '../../lib/media';
+import type { Language } from '../../lib/routes';
+interface Props { lang: Language; media: GalleryMedia[] }
+const { lang, media } = Astro.props;
+const gallery = media.filter(item => item.visible);
+const c = copy[lang];
+const fullImages = await Promise.all(gallery.map(item => getImage({ src: imageSource(item.image), format: 'webp', quality: 90 })));
+---
+  <section class:list={['project-grid', { 'single-media': gallery.length === 1 }]} data-media-modal="project-viewer" aria-label={c.projects}>
+    {gallery.map((item, i) => {
+      const title = item[lang].title;
+      const description = [item[lang].description, item.illustrative ? c.illustrative : ''].filter(Boolean).join(' ');
+      return <figure>
+        <button type="button" class="gallery-trigger media-trigger" data-gallery-index={i} data-kind={item.kind} data-src={item.kind === 'video' ? videoUrl(item.video || '') : fullImages[i]?.src} data-poster={fullImages[i]?.src} data-title={title} data-description={description} aria-label={`${item.kind === 'video' ? (lang === 'mk' ? 'Отвори видео' : 'Open video') : c.viewImage} — ${title}`}>
+          <Photo name={item.image} alt={title} />
+          <span class="photo-expand" aria-hidden="true">{item.kind === 'video' ? '▷' : '↗'}</span>
+        </button>
+        <figcaption><span class="index">{String(i + 1).padStart(2, '0')}</span><h2>{title}</h2></figcaption>
+      </figure>;
+    })}
+  </section>
+  {gallery.length === 0 && <p class="page-intro">{lang === 'mk' ? 'Нови фотографии и видеа наскоро.' : 'New photographs and videos coming soon.'}</p>}
+<MediaViewer id="project-viewer" lang={lang} />

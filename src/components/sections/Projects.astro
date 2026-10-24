@@ -1,32 +1,50 @@
 ---
-import { getImage } from 'astro:assets';
 import Photo from '../ui/Photo.astro';
-import MediaViewer from '../ui/MediaViewer.astro';
 import PageHeading from '../ui/PageHeading.astro';
-import { copy, gallery } from '../../data/site';
-import { imageSource, videoUrl } from '../../lib/media';
-import type { Language } from '../../lib/routes';
-interface Props { lang: Language }
-const { lang } = Astro.props;
+import ProjectGallery from './ProjectGallery.astro';
+import type { GalleryMedia } from '../../data/content';
+import { copy, projects } from '../../data/site';
+import { route, type Language } from '../../lib/routes';
+interface Props { lang: Language; projectSlug?: string }
+const { lang, projectSlug } = Astro.props;
 const c = copy[lang];
-const fullImages = await Promise.all(gallery.map(item => getImage({ src: imageSource(item.image), format: 'webp', quality: 90 })));
-const allIllustrative = gallery.length > 0 && gallery.every(item => item.illustrative);
+const selected = projects.find(project => project.slug === projectSlug);
+const visibleMedia = (selected ? selected.media : projects.flatMap(project => project.media)).filter(item => item.visible);
+const allIllustrative = visibleMedia.length > 0 && visibleMedia.every(item => item.illustrative);
+const mediaCount = (media: GalleryMedia[]) => {
+  const visible = media.filter(item => item.visible);
+  const photos = visible.filter(item => item.kind === 'image').length;
+  const videos = visible.filter(item => item.kind === 'video').length;
+  return [
+    photos ? `${photos} ${lang === 'mk' ? (photos === 1 ? 'фотографија' : 'фотографии') : (photos === 1 ? 'photo' : 'photos')}` : '',
+    videos ? `${videos} ${lang === 'mk' ? (videos === 1 ? 'видео' : 'видеа') : (videos === 1 ? 'video' : 'videos')}` : '',
+  ].filter(Boolean).join(' / ') || (lang === 'mk' ? 'Наскоро' : 'Coming soon');
+};
 ---
 <div class="container standard-page">
-  <PageHeading eyebrow={`HERAL METAL / ${c.projects}`} title={c.projectsTitle} description={c.projectsIntro}>{allIllustrative && <p class="image-disclosure">{c.illustrative}</p>}</PageHeading>
-  <section class="project-grid" data-media-modal="project-viewer" aria-label={c.projects}>
-    {gallery.map((item, i) => {
-      const title = item[lang].title;
-      const description = [item[lang].description, item.illustrative ? c.illustrative : ''].filter(Boolean).join(' ');
-      return <figure>
-        <button type="button" class="gallery-trigger media-trigger" data-gallery-index={i} data-kind={item.kind} data-src={item.kind === 'video' ? videoUrl(item.video || '') : fullImages[i]?.src} data-poster={fullImages[i]?.src} data-title={title} data-description={description} aria-label={`${item.kind === 'video' ? (lang === 'mk' ? 'Отвори видео' : 'Open video') : c.viewImage} — ${title}`}>
-          <Photo name={item.image} alt={title} />
-          <span class="photo-expand" aria-hidden="true">{item.kind === 'video' ? '▷' : '↗'}</span>
-        </button>
-        <figcaption><span class="index">{String(i + 1).padStart(2, '0')}</span><h2>{title}</h2></figcaption>
-      </figure>;
-    })}
-  </section>
-  {gallery.length === 0 && <p class="page-intro">{lang === 'mk' ? 'Нови фотографии и видеа наскоро.' : 'New photographs and videos coming soon.'}</p>}
+  {selected ? <>
+    <nav class="breadcrumbs" aria-label={lang === 'mk' ? 'Патека' : 'Breadcrumb'}>
+      <a href={route('home', lang)}>{c.home}</a><span aria-hidden="true">/</span>
+      <a href={route('projects', lang)}>{c.projects}</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{selected[lang].title}</span>
+    </nav>
+    <PageHeading eyebrow={`HERAL METAL / ${c.projects}`} title={selected[lang].title} description={selected[lang].description || ''}>{allIllustrative && <p class="image-disclosure">{c.illustrative}</p>}</PageHeading>
+    <div class="project-gallery-heading">
+      <h2>{lang === 'mk' ? 'Галерија на проектот' : 'Project gallery'}</h2>
+      <p>{mediaCount(selected.media)}</p>
+    </div>
+    <ProjectGallery lang={lang} media={selected.media} />
+    <a class="project-back" href={route('projects', lang)}>← {lang === 'mk' ? 'Назад кон сите проекти' : 'Back to all projects'}</a>
+  </> : <>
+    <PageHeading eyebrow={`HERAL METAL / ${c.projects}`} title={c.projectsTitle} description={c.projectsIntro}>{allIllustrative && <p class="image-disclosure">{c.illustrative}</p>}</PageHeading>
+    <section class="project-grid" aria-label={c.projects}>
+      {projects.map((project, i) => <a class="project-card" href={route(`projects/${project.slug}`, lang)}>
+        <figure>
+          <div class="project-card-image"><Photo name={project.cover} alt={project[lang].title} /><span class="photo-expand" aria-hidden="true">↗</span></div>
+          <figcaption><span class="index">{String(i + 1).padStart(2, '0')}</span><div><h2>{project[lang].title}</h2><p class="project-media-count">{mediaCount(project.media)}</p></div></figcaption>
+        </figure>
+      </a>)}
+    </section>
+    {projects.length === 0 && <p class="page-intro">{lang === 'mk' ? 'Нови проекти наскоро.' : 'New projects coming soon.'}</p>}
+  </>}
 </div>
-<MediaViewer id="project-viewer" lang={lang} />

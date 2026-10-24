@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 const dist = path.resolve('dist');
+const content = JSON.parse(await readFile('src/content/site.json', 'utf8'));
+const projectCount = content.projects.filter(project => project.visible).length;
 const repository = process.env.GITHUB_REPOSITORY || 'Bojan-Ivanovski/heral-metal';
 const [owner, name] = repository.split('/');
 const base = process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`);
@@ -11,8 +13,8 @@ async function walk(dir) { return (await Promise.all((await readdir(dir, { withF
 const files = await walk(dist);
 const htmlFiles = files.filter(f => f.endsWith('.html') && !path.relative(dist, f).startsWith(`admin${path.sep}`));
 const html = await Promise.all(htmlFiles.map(async f => [f, await readFile(f, 'utf8')]));
-test('all 20 language routes and custom 404 are built with unique metadata', () => {
-  assert.equal(htmlFiles.length, 21);
+test('all localized routes, project pages and custom 404 are built with unique metadata', () => {
+  assert.equal(htmlFiles.length, 21 + projectCount * 2);
   const titles = new Set();
   for (const [file, text] of html) {
     assert.equal((text.match(/<h1(?:\s|>)/g) || []).length, 1, `${file}: one h1`);
@@ -44,7 +46,7 @@ test('every local link, image source, responsive image and script resolves under
 });
 test('sitemap lists all localized pages and the correct hosting URL', async () => {
   const sitemap = await readFile(path.join(dist, 'sitemap.xml'), 'utf8');
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 20);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 20 + projectCount * 2);
   assert.ok(sitemap.includes(`${site}${base}/en/quote/`));
   assert.ok(!sitemap.includes('404'));
   assert.ok((await readFile(path.join(dist, 'robots.txt'), 'utf8')).includes(`${site}${base}/sitemap.xml`));

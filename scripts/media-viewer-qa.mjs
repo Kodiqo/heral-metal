@@ -17,6 +17,10 @@ try {
     for (const [width, height] of [[320, 800], [375, 900], [768, 500], [1440, 1000]]) {
       await page.setViewportSize({ width, height });
       await page.goto(url + route);
+      await page.locator('.project-card').first().click();
+      const itemCount = await page.locator('[data-gallery-index]').count();
+      const nextPosition = `${Math.min(2, itemCount)} / ${itemCount}`;
+      const initialPosition = `1 / ${itemCount}`;
       const trigger = page.locator('[data-gallery-index="0"]');
       await trigger.click();
       await page.waitForFunction(() => document.querySelector('.viewer-stage').getAttribute('aria-busy') === 'false');
@@ -38,19 +42,19 @@ try {
       const audit = await page.evaluate(() => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
       assert.deepEqual(audit.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })), []);
       await page.keyboard.press('ArrowRight');
-      assert.equal(await page.locator('#gallery-position').textContent(), '2 / 6');
+      assert.equal(await page.locator('#gallery-position').textContent(), nextPosition);
       await page.keyboard.press('ArrowLeft');
       await page.keyboard.press('ArrowLeft');
-      assert.equal(await page.locator('#gallery-position').textContent(), '6 / 6');
-      await page.locator('.viewer-next').click();
-      assert.equal(await page.locator('#gallery-position').textContent(), '1 / 6');
+      assert.equal(await page.locator('#gallery-position').textContent(), `${itemCount} / ${itemCount}`);
+      if (itemCount > 1) await page.locator('.viewer-next').click();
+      assert.equal(await page.locator('#gallery-position').textContent(), initialPosition);
       await page.locator('.viewer-stage').evaluate(el => {
         const point = new Touch({ identifier: 1, target: el, clientX: 250, clientY: 100 });
         el.dispatchEvent(new TouchEvent('touchstart', { touches: [point], bubbles: true }));
         const end = new Touch({ identifier: 1, target: el, clientX: 100, clientY: 100 });
         el.dispatchEvent(new TouchEvent('touchend', { changedTouches: [end], bubbles: true }));
       });
-      assert.equal(await page.locator('#gallery-position').textContent(), '2 / 6');
+      assert.equal(await page.locator('#gallery-position').textContent(), nextPosition);
       if (width === 1440) {
         await page.locator('.viewer-fullscreen').click();
         await page.waitForFunction(() => Boolean(document.fullscreenElement));
@@ -69,6 +73,10 @@ try {
   }
   // Exercise video playback using a locally generated clip, without adding sample media to the site.
   await page.goto(url + 'en/projects/');
+  await page.locator('.project-card').first().click();
+  const itemCount = await page.locator('[data-gallery-index]').count();
+  const initialPosition = `1 / ${itemCount}`;
+  const originalSource = await page.locator('[data-gallery-index="0"]').getAttribute('data-src');
   await page.evaluate(async () => {
     const canvas = document.createElement('canvas');
     canvas.width = 320; canvas.height = 180;
@@ -93,7 +101,7 @@ try {
   await page.locator('[data-gallery-index="0"]').click();
   await page.waitForFunction(() => document.querySelector('video')?.readyState >= 2);
   assert.equal(await page.locator('.viewer-controls').isVisible(), true);
-  await page.locator('video').evaluate(video => { video.pause(); video.currentTime = 0; });
+  await page.locator('video').evaluate(video => { if (video instanceof HTMLVideoElement) { video.pause(); video.currentTime = 0; } });
   await page.locator('.viewer-toggle').click();
   await page.waitForFunction(() => !document.querySelector('video').paused);
   await page.locator('.viewer-mute').click();
@@ -103,16 +111,15 @@ try {
   await page.locator('.viewer-seek').fill('25');
   await page.keyboard.press('ArrowRight');
   // Range controls keep arrow keys; navigation changes only after focus leaves them.
-  assert.equal(await page.locator('#gallery-position').textContent(), '1 / 6');
-  await page.locator('.viewer-next').click();
-  assert.equal(await page.locator('video').count(), 0);
-  assert.equal(await page.locator('.viewer-controls').isVisible(), false);
+  assert.equal(await page.locator('#gallery-position').textContent(), initialPosition);
   await page.locator('.media-close').click();
+  await page.waitForFunction(() => !document.querySelector('video'));
+  assert.equal(await page.locator('video').count(), 0);
   await page.locator('[data-gallery-index="0"]').evaluate(el => { el.dataset.kind = 'image'; el.dataset.src = '/missing-viewer-image.webp'; });
   await page.locator('[data-gallery-index="0"]').click();
   await page.waitForFunction(() => !document.querySelector('.viewer-retry').hidden);
   assert.match(await page.locator('.viewer-status').textContent(), /could not load/);
-  await page.locator('[data-gallery-index="0"]').evaluate(el => { el.dataset.src = document.querySelector('[data-gallery-index="1"]').dataset.src; });
+  await page.locator('[data-gallery-index="0"]').evaluate((el, src) => { el.dataset.src = src; }, originalSource);
   await page.locator('.viewer-retry').click();
   await page.waitForFunction(() => document.querySelector('.viewer-stage').getAttribute('aria-busy') === 'false' && document.querySelector('dialog img')?.naturalWidth > 0);
   assert.equal(await page.locator('.viewer-retry').isVisible(), false);

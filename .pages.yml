@@ -18,8 +18,8 @@ media:
   - mp4
   rename: random
 content:
-- name: gallery
-  label: 01 · Фотографии и видеа
+- name: projects
+  label: 01 · Проекти и нивни галерии
   type: file
   path: src/content/site.json
   format: json
@@ -28,8 +28,8 @@ content:
     rename: false
     delete: false
   fields:
-  - name: gallery
-    label: Галерија
+  - name: projects
+    label: Проекти
     type: object
     list:
       max: 80
@@ -37,76 +37,138 @@ content:
         collapsed: true
         summary: '{fields.mk.title}'
     fields:
-    - name: kind
-      label: Вид на содржина
-      type: select
+    - name: slug
+      label: Линк на проектот
+      type: string
       required: true
-      default: image
-      options:
-        values:
-        - value: image
-          label: Фотографија
-        - value: video
-          label: Видео
-    - name: image
-      label: Фотографија / насловна фотографија
+      description: Кратко име со латиница и цртички, на пример steel-structure-skopje. Задржи го истиот
+        линк по објавувањето.
+      pattern:
+        regex: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+        message: Користи мали латинични букви, бројки и цртички.
+    - name: cover
+      label: Насловна фотографија на проектот
       type: image
       required: true
       options:
         media: images
-      description: JPG, PNG или WebP. Препорачано до 2 MB, најмногу 5 MB. За видео, избери насловна фотографија.
-    - name: video
-      label: Видео снимка
-      type: file
-      required: false
-      options:
-        media: videos
-        extensions:
-        - mp4
-      description: 'Само за видео: MP4 до 25 MB, препорачано до 20 MB.'
     - name: mk
       label: Македонски
       type: object
       fields:
       - name: title
-        label: Наслов
+        label: Име на проектот
         type: string
         required: true
         options:
           maxlength: 100
       - name: description
-        label: Краток опис
+        label: Опис на проектот
         type: text
         required: false
         options:
-          maxlength: 500
+          maxlength: 1500
     - name: en
       label: English
       type: object
       fields:
       - name: title
-        label: Наслов
+        label: Име на проектот
         type: string
         required: true
         options:
           maxlength: 100
       - name: description
-        label: Краток опис
+        label: Опис на проектот
         type: text
         required: false
         options:
-          maxlength: 500
+          maxlength: 1500
     - name: visible
-      label: Прикажи на веб-страницата
+      label: Прикажи го проектот
       type: boolean
       required: true
       default: true
-    - name: illustrative
-      label: Илустративна содржина
-      type: boolean
-      required: true
-      default: false
-      description: Вклучи за примерни фотографии што не прикажуваат документиран завршен проект.
+    - name: media
+      label: Фотографии и видеа во овој проект
+      type: object
+      list:
+        max: 80
+        collapsible:
+          collapsed: true
+          summary: '{fields.mk.title}'
+      fields:
+      - name: kind
+        label: Вид на содржина
+        type: select
+        required: true
+        default: image
+        options:
+          values:
+          - value: image
+            label: Фотографија
+          - value: video
+            label: Видео
+      - name: image
+        label: Фотографија / насловна фотографија
+        type: image
+        required: true
+        options:
+          media: images
+        description: JPG, PNG или WebP. Препорачано до 2 MB, најмногу 5 MB. За видео, избери насловна
+          фотографија.
+      - name: video
+        label: Видео снимка
+        type: file
+        required: false
+        options:
+          media: videos
+          extensions:
+          - mp4
+        description: 'Само за видео: MP4 до 25 MB, препорачано до 20 MB.'
+      - name: mk
+        label: Македонски
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 100
+        - name: description
+          label: Краток опис
+          type: text
+          required: false
+          options:
+            maxlength: 500
+      - name: en
+        label: English
+        type: object
+        fields:
+        - name: title
+          label: Наслов
+          type: string
+          required: true
+          options:
+            maxlength: 100
+        - name: description
+          label: Краток опис
+          type: text
+          required: false
+          options:
+            maxlength: 500
+      - name: visible
+        label: Прикажи на веб-страницата
+        type: boolean
+        required: true
+        default: true
+      - name: illustrative
+        label: Илустративна содржина
+        type: boolean
+        required: true
+        default: false
+        description: Вклучи за примерни фотографии што не прикажуваат документиран завршен проект.
 - name: home
   label: 02 · Почетна страница
   type: file

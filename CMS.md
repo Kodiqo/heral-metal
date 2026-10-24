@@ -6,7 +6,7 @@ Heral Metal uses the same hosted [Pages CMS](https://app.pagescms.org/) setup as
 
 | Editor | Content |
 | --- | --- |
-| 01 · Фотографии и видеа | Add, reorder, hide or show photographs/videos; edit Macedonian and English titles and descriptions; mark illustrative images |
+| 01 · Проекти и нивни галерии | Add projects with stable URL slugs, covers and bilingual descriptions; manage each project’s own photographs/videos |
 | 02 · Почетна страница | Replace the main photograph and edit its description and introduction in both languages |
 | 03 · Услуги | Edit the three existing services, their descriptions and three scope points in both languages |
 | 04 · За нас и сертификати | Edit the company introduction and certificate section introduction in both languages |
@@ -19,6 +19,8 @@ Content lives in `src/content/site.json`. Keep `settings.content.merge: true` in
 ## Uploads and publishing
 
 Photographs and video covers go to `src/assets` and are optimized by Astro. Use JPG, PNG or WebP, ideally below 2 MB (build limit: 5 MB). MP4 videos go to `public/uploads/videos`, ideally below 20 MB (build limit: 25 MB). Every video needs a cover image. Upload filenames are randomized by Pages CMS.
+
+Project cards open dedicated pages in both languages. In “01 · Проекти и нивни галерии”, add a project, set its unique lowercase URL slug and cover, then add photos/videos inside its “Фотографии и видеа во овој проект” list. Keep the slug unchanged after sharing the page link. Hiding a project removes both its card and its generated pages; hiding one media item affects only that gallery.
 
 Both languages need titles. Descriptions are optional. Hiding a gallery entry is reversible. Empty galleries show a short placeholder. Illustrative entries retain the corresponding disclosure in the viewer; newly added real work is not automatically labeled illustrative.
 

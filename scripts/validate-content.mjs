@@ -40,17 +40,33 @@ export function validateContent(site, root = process.cwd()) {
     }
   }
   if (typeof site.business?.email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.business.email)) errors.push('Contact: enter a valid email address.');
-  if (!Array.isArray(site.gallery) || site.gallery.length > 80) errors.push('Gallery: use a list with at most 80 items.');
-  else for (const [i, item] of site.gallery.entries()) {
-    const label = `Gallery item ${i + 1}`;
-    if (!['image', 'video'].includes(item?.kind)) errors.push(`${label}: choose image or video.`);
+  const slugs = new Set();
+  if (!Array.isArray(site.projects) || site.projects.length > 80) errors.push('Projects: use a list with at most 80 projects.');
+  else for (const [projectIndex, project] of site.projects.entries()) {
+    const projectLabel = `Project ${projectIndex + 1}`;
+    if (typeof project?.slug !== 'string' || project.slug.length > 80 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug) || slugs.has(project.slug)) errors.push(`${projectLabel}: choose a unique URL slug using lowercase letters, numbers and hyphens.`);
+    else slugs.add(project.slug);
+    if (typeof project?.visible !== 'boolean') errors.push(`${projectLabel}: set visibility.`);
+    media(project?.cover, `${projectLabel} cover`);
     for (const lang of ['mk', 'en']) {
-      text(item?.[lang]?.title, `${label} ${lang} title`, 100);
-      text(item?.[lang]?.description, `${label} ${lang} description`, 500, true);
+      text(project?.[lang]?.title, `${projectLabel} ${lang} title`, 100);
+      text(project?.[lang]?.description, `${projectLabel} ${lang} description`, 1500, true);
     }
-    if (typeof item?.visible !== 'boolean' || typeof item?.illustrative !== 'boolean') errors.push(`${label}: set visibility and illustrative toggles.`);
-    media(item?.image, `${label} photograph / video cover`);
-    if (item?.kind === 'video') media(item?.video, `${label} video`, true);
+    if (!Array.isArray(project?.media) || project.media.length > 80) {
+      errors.push(`${projectLabel}: use a gallery with at most 80 items.`);
+      continue;
+    }
+    for (const [i, item] of project.media.entries()) {
+      const label = `${projectLabel} gallery item ${i + 1}`;
+      if (!['image', 'video'].includes(item?.kind)) errors.push(`${label}: choose image or video.`);
+      for (const lang of ['mk', 'en']) {
+        text(item?.[lang]?.title, `${label} ${lang} title`, 100);
+        text(item?.[lang]?.description, `${label} ${lang} description`, 500, true);
+      }
+      if (typeof item?.visible !== 'boolean' || typeof item?.illustrative !== 'boolean') errors.push(`${label}: set visibility and illustrative toggles.`);
+      media(item?.image, `${label} photograph / video cover`);
+      if (item?.kind === 'video') media(item?.video, `${label} video`, true);
+    }
   }
   return errors;
 }
@@ -61,7 +77,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (errors.length) {
       console.error(`CMS content cannot be published:\n${errors.map(error => `- ${error}`).join('\n')}`);
       process.exitCode = 1;
-    } else console.log('CMS content valid: both languages, gallery, services, homepage, about and contact.');
+    } else console.log('CMS content valid: both languages, projects and their galleries, services, homepage, about and contact.');
   } catch (error) {
     console.error(`Cannot read CMS content: ${error.message}`);
     process.exitCode = 1;

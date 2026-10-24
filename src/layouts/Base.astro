@@ -1,7 +1,7 @@
 ---
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import { copy, metadata, services } from '../data/site';
+import { copy, metadata, services, projects } from '../data/site';
 import { absolute, asset, route, type Language, type Page } from '../lib/routes';
 import '../styles/global.css';
 interface Props { page: Page | '404'; lang: Language }
@@ -10,8 +10,9 @@ const { title, description } = metadata(page, lang);
 const canonical = absolute(route(page, lang));
 const orgId = `${absolute(route('home'))}#organization`;
 const org = { '@type': 'Organization', '@id': orgId, name: 'Heral Metal', alternateName: 'Херал Метал', url: absolute(route('home')), description: copy[lang].tagline };
+const project = projects.find(project => page === `projects/${project.slug}`);
 const service = services.find(s => page === `services/${s.id}`);
-const structured = { '@context': 'https://schema.org', '@graph': [org, { '@type': 'WebSite', name: 'Heral Metal', url: absolute(route('home')), inLanguage: ['mk', 'en'], publisher: { '@id': orgId } }, ...(service ? [{ '@type': 'Service', name: service[lang].title, description: service[lang].description, provider: { '@id': orgId }, url: canonical }] : []), ...(page !== 'home' && page !== '404' ? [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: copy[lang].home, item: absolute(route('home', lang)) }, { '@type': 'ListItem', position: 2, name: title.split(' | ')[0], item: canonical }] }] : [])] };
+const structured = { '@context': 'https://schema.org', '@graph': [org, { '@type': 'WebSite', name: 'Heral Metal', url: absolute(route('home')), inLanguage: ['mk', 'en'], publisher: { '@id': orgId } }, ...(service ? [{ '@type': 'Service', name: service[lang].title, description: service[lang].description, provider: { '@id': orgId }, url: canonical }] : []), ...(page !== 'home' && page !== '404' ? [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: copy[lang].home, item: absolute(route('home', lang)) }, { '@type': 'ListItem', position: 2, name: project ? copy[lang].projects : title.split(' | ')[0], item: project ? absolute(route('projects', lang)) : canonical }, ...(project ? [{ '@type': 'ListItem', position: 3, name: project[lang].title, item: canonical }] : [])] }] : [])] };
 ---
 <!doctype html>
 <html lang={lang}>

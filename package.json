@@ -13,7 +13,8 @@
     "test:viewer": "node scripts/media-viewer-qa.mjs",
     "test:performance": "node scripts/performance-qa.mjs",
     "verify": "npm run check && npm run build && npm test",
-    "validate:content": "node scripts/validate-content.mjs"
+    "validate:content": "node scripts/validate-content.mjs",
+    "test:projects": "node scripts/projects-qa.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.3",
