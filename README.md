@@ -1,12 +1,19 @@
 # Heral Metal
 
+[![Deploy](https://github.com/Kodiqo/heral-metal/actions/workflows/deploy.yml/badge.svg)](https://github.com/Kodiqo/heral-metal/actions/workflows/deploy.yml)
+![Astro](https://img.shields.io/badge/Astro-5-BC52EE?logo=astro&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+
+Bilingual (Macedonian / English) landing site for Heral Metal: metal structures, machine maintenance and gas pipelines. Built by [Kodiqo](https://github.com/Kodiqo).
+
 The current UI consistency rules and verification record are documented in [docs/consistency-audit.md](docs/consistency-audit.md). Shared layout and typography tokens live in `src/styles/global.css`; equivalent page introductions use `PageHeading.astro`. Page navigation uses normal browser links and history without transitions.
 
 To capture every route for visual review, run `BROWSER_EXECUTABLE=/opt/brave-bin/brave node scripts/audit-capture.mjs after` after building. Captures include 375, 768 and 1440px layouts, measurements and contact sheets in `test-results/consistency/after/`. The browser suite checks all 21 HTML routes at ten widths, shared header/footer geometry, grid overlaps, card alignment, accessibility and existing interactions.
 
 Static Astro website implemented from the supplied Figma design, with Macedonian and English content, responsive layouts and GitHub Pages deployment.
 
-Repository: https://github.com/Bojan-Ivanovski/heral-metal
+Repository: https://github.com/Kodiqo/heral-metal
 
 Production URL: https://bojan-ivanovski.github.io/heral-metal/ (deployment verification is recorded in `docs/verification.md`).
 
@@ -74,3 +81,7 @@ This verifies the production build, records browser and Lighthouse results, comm
 Enable **Settings → Pages → Source → GitHub Actions**. The workflow in `.github/workflows/deploy.yml` runs on `main` pushes, pull requests and manual dispatch. It installs from the lockfile, checks types, builds, tests links/assets/form validation, runs browser and accessibility checks, collects Lighthouse reports, uploads the static Pages artifact and deploys using official GitHub actions. Pull requests verify without deploying. Deployment uses `pages: write` and `id-token: write`, with read-only repository contents permission.
 
 See `docs/design-system.md` for the extracted specification, original asset mapping and documented visual corrections. See `docs/verification.md` for actual verification results and external prerequisites.
+
+## Contributing and security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
