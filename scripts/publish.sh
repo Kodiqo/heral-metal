@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 task_root="$PWD"
-repo="${GITHUB_REPOSITORY:-Bojan-Ivanovski/heral-metal}"
+repo="${GITHUB_REPOSITORY:-Kodiqo/heral-metal}"
 mkdir -p test-results
 
 # This helper runs in a terminal with browser and network access.

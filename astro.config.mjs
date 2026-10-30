@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-const repository = process.env.GITHUB_REPOSITORY || 'Bojan-Ivanovski/heral-metal';
+const repository = process.env.GITHUB_REPOSITORY || 'Kodiqo/heral-metal';
 const [owner, name] = repository.split('/');
 export default defineConfig({
   output: 'static',

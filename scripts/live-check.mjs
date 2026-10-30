@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises';
-const [owner, name] = (process.env.GITHUB_REPOSITORY || 'Bojan-Ivanovski/heral-metal').split('/');
+const [owner, name] = (process.env.GITHUB_REPOSITORY || 'Kodiqo/heral-metal').split('/');
 const site = process.env.SITE_URL || `https://${owner}.github.io`;
 const base = process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`);
 const root = new URL(`${base}/`, site).href;

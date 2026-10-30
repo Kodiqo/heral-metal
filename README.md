@@ -15,7 +15,7 @@ Static Astro website implemented from the supplied Figma design, with Macedonian
 
 Repository: https://github.com/Kodiqo/heral-metal
 
-Production URL: https://bojan-ivanovski.github.io/heral-metal/ (deployment verification is recorded in `docs/verification.md`).
+Production URL: https://kodiqo.github.io/heral-metal/ (deployment verification is recorded in `docs/verification.md`).
 
 ## Development
 

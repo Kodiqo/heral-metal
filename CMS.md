@@ -29,8 +29,8 @@ Saving creates a Git commit. The existing deployment workflow validates both lan
 ## One-time owner setup
 
 1. Publish `.pages.yml` and these changes to `main`.
-2. Sign into [Pages CMS](https://app.pagescms.org/Bojan-Ivanovski/heral-metal/main) using the repository owner's GitHub account.
-3. Grant the Pages CMS GitHub App access to `Bojan-Ivanovski/heral-metal`.
+2. Sign into [Pages CMS](https://app.pagescms.org/Kodiqo/heral-metal/main) using the repository owner's GitHub account.
+3. Grant the Pages CMS GitHub App access to `Kodiqo/heral-metal`.
 4. Open the repository on `main` and confirm the five editors appear.
 5. Invite the intended editor email through Pages CMS collaborator management. Invitations are stored by Pages CMS, not in this repository.
 6. In a separate browser profile, verify the invited editor can sign in using email. Make a small content edit, wait for deployment and confirm it on the live site. Restore the sample edit.
