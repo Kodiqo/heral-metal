@@ -3,7 +3,7 @@ import content from './content';
 export const company = 'Heral Metal';
 export const contactEmail = content.business.email;
 // FormSubmit recipients are public browser configuration, not private credentials.
-export const formRecipient = import.meta.env.PUBLIC_FORMSUBMIT_RECIPIENT || 'doriko6256@goldvester.com';
+export const formRecipient = import.meta.env.PUBLIC_FORMSUBMIT_RECIPIENT || 'contact@heralmetal.com.mk';
 export const formEndpoint = `https://formsubmit.co/${encodeURIComponent(formRecipient)}`;
 export const formAjaxEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(formRecipient)}`;
 export const copy = {

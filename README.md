@@ -47,7 +47,7 @@ Every content route is also available under `/en/`. `404.html`, `sitemap.xml`, `
 
 ## Quote form
 
-The form sends requests to FormSubmit at `doriko6256@goldvester.com`. Set `PUBLIC_FORMSUBMIT_RECIPIENT` at build time to override the recipient with another email or an activated FormSubmit token. This is public browser configuration. FormSubmit requires one-time activation from the recipient inbox before it delivers submissions.
+The form sends requests to FormSubmit at `contact@heralmetal.com.mk`. Set `PUBLIC_FORMSUBMIT_RECIPIENT` at build time to override the recipient with another email or an activated FormSubmit token. This is public browser configuration. FormSubmit requires one-time activation from the recipient inbox before it delivers submissions.
 
 Required fields are name, email, service, description and contact consent. Attachments are optional; allowed types are PDF, JPG, PNG and DWG, maximum 5 MB. Text requests use the FormSubmit AJAX endpoint and keep inline feedback. Requests with attachments use the documented native multipart endpoint and continue to FormSubmit for CAPTCHA and confirmation. Native submission also works without JavaScript. No visitor details are stored in browser local storage.
 

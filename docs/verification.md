@@ -17,7 +17,7 @@ The public repository was created by the user and confirmed using the GitHub con
 
 - A real FormSubmit submission and inbox delivery have not been verified. Automated form tests mock responses and send no email. The recipient must activate the form through their inbox.
 - Attachments use FormSubmit’s native multipart flow, with the site’s 5 MB limit. Text requests use AJAX.
-- The displayed contact email does not configure form delivery. FormSubmit sends to `doriko6256@goldvester.com`, overridable with `PUBLIC_FORMSUBMIT_RECIPIENT`.
+- The displayed contact email does not configure form delivery. FormSubmit sends to `contact@heralmetal.com.mk`, overridable with `PUBLIC_FORMSUBMIT_RECIPIENT`.
 - Company founding and certification content is reproduced from Figma, with no additional claims. No independent certificate verification or real project records were supplied.
 - Automated accessibility checks complement but do not replace a manual screen-reader or WCAG conformance assessment.
 
