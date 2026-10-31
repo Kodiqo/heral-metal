@@ -13,6 +13,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://heralmetal.com.mk
+      BASE_PATH: /
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7

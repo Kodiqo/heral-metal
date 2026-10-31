@@ -26,7 +26,7 @@ export function createHandler(root = path.resolve('dist'), base = '/heral-metal'
     response.end(request.method === 'HEAD' ? undefined : body);
   };
 }
-export async function serveDist(port = 0, base = '/heral-metal') {
+export async function serveDist(port = 0, base = (process.env.BASE_PATH || '/heral-metal').replace(/\/+$/, '')) {
   const server = http.createServer(createHandler(path.resolve('dist'), base));
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolve); });
   return { server, url: `http://127.0.0.1:${server.address().port}${base}/` };

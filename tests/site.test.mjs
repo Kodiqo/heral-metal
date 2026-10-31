@@ -7,7 +7,7 @@ const content = JSON.parse(await readFile('src/content/site.json', 'utf8'));
 const projectCount = content.projects.filter(project => project.visible).length;
 const repository = process.env.GITHUB_REPOSITORY || 'Kodiqo/heral-metal';
 const [owner, name] = repository.split('/');
-const base = process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`);
+const base = (process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`)).replace(/\/+$/, '');
 const site = new URL(process.env.SITE_URL || `https://${owner}.github.io`).origin;
 async function walk(dir) { return (await Promise.all((await readdir(dir, { withFileTypes: true })).map(entry => entry.isDirectory() ? walk(path.join(dir, entry.name)) : path.join(dir, entry.name)))).flat(); }
 const files = await walk(dist);

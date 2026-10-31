@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 const [owner, name] = (process.env.GITHUB_REPOSITORY || 'Kodiqo/heral-metal').split('/');
 const site = process.env.SITE_URL || `https://${owner}.github.io`;
-const base = process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`);
+const base = (process.env.BASE_PATH || (name === `${owner}.github.io` ? '' : `/${name}`)).replace(/\/+$/, '');
 const root = new URL(`${base}/`, site).href;
 const pages = ['', 'services/', 'services/metal-structures/', 'services/machine-maintenance/', 'services/gas-pipelines/', 'projects/', 'about/', 'contact/', 'quote/', 'privacy/'];
 const routes = [...pages, ...pages.map(page => `en/${page}`), 'sitemap.xml', 'robots.txt', 'fonts/arimo.woff2', 'fonts/roboto-condensed.woff2'];
