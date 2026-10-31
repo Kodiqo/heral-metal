@@ -106,27 +106,22 @@
       "slug": "steel-structures",
       "cover": "/src/assets/steel-structure.png",
       "mk": {
-        "title": "Челични конструкции",
-        "description": ""
+        "title": "Челични конструкции"
       },
       "en": {
-        "title": "Steel structures",
-        "description": ""
+        "title": "Steel structures"
       },
       "visible": true,
       "media": [
         {
+          "kind": "image",
           "image": "/src/assets/steel-structure.png",
           "mk": {
-            "title": "Челични конструкции",
-            "description": ""
+            "title": "Челични конструкции"
           },
           "en": {
-            "title": "Steel structures",
-            "description": ""
+            "title": "Steel structures"
           },
-          "kind": "image",
-          "video": "",
           "visible": true,
           "illustrative": true
         }
@@ -136,57 +131,22 @@
       "slug": "precision-machining",
       "cover": "/src/assets/machining.png",
       "mk": {
-        "title": "Прецизна машинска обработка",
-        "description": ""
+        "title": "Прецизна машинска обработка"
       },
       "en": {
-        "title": "Precision machining",
-        "description": ""
+        "title": "Precision machining"
       },
       "visible": true,
       "media": [
         {
+          "kind": "image",
           "image": "/src/assets/machining.png",
           "mk": {
-            "title": "Прецизна машинска обработка",
-            "description": ""
+            "title": "Прецизна машинска обработка"
           },
           "en": {
-            "title": "Precision machining",
-            "description": ""
+            "title": "Precision machining"
           },
-          "kind": "image",
-          "video": "",
-          "visible": true,
-          "illustrative": true
-        }
-      ]
-    },
-    {
-      "slug": "metal-structures",
-      "cover": "/src/assets/connections.png",
-      "mk": {
-        "title": "Метални конструкции",
-        "description": ""
-      },
-      "en": {
-        "title": "Metal structures",
-        "description": ""
-      },
-      "visible": true,
-      "media": [
-        {
-          "image": "/src/assets/connections.png",
-          "mk": {
-            "title": "Метални конструкции",
-            "description": ""
-          },
-          "en": {
-            "title": "Metal structures",
-            "description": ""
-          },
-          "kind": "image",
-          "video": "",
           "visible": true,
           "illustrative": true
         }
@@ -196,27 +156,22 @@
       "slug": "machine-maintenance",
       "cover": "/src/assets/maintenance.png",
       "mk": {
-        "title": "Машинско одржување",
-        "description": ""
+        "title": "Машинско одржување"
       },
       "en": {
-        "title": "Machine maintenance",
-        "description": ""
+        "title": "Machine maintenance"
       },
       "visible": true,
       "media": [
         {
+          "kind": "image",
           "image": "/src/assets/maintenance.png",
           "mk": {
-            "title": "Машинско одржување",
-            "description": ""
+            "title": "Машинско одржување"
           },
           "en": {
-            "title": "Machine maintenance",
-            "description": ""
+            "title": "Machine maintenance"
           },
-          "kind": "image",
-          "video": "",
           "visible": true,
           "illustrative": true
         }
@@ -226,27 +181,22 @@
       "slug": "gas-pipelines",
       "cover": "/src/assets/pipeline.png",
       "mk": {
-        "title": "Гасоводни системи",
-        "description": ""
+        "title": "Гасоводни системи"
       },
       "en": {
-        "title": "Gas pipeline systems",
-        "description": ""
+        "title": "Gas pipeline systems"
       },
       "visible": true,
       "media": [
         {
+          "kind": "image",
           "image": "/src/assets/pipeline.png",
           "mk": {
-            "title": "Гасоводни системи",
-            "description": ""
+            "title": "Гасоводни системи"
           },
           "en": {
-            "title": "Gas pipeline systems",
-            "description": ""
+            "title": "Gas pipeline systems"
           },
-          "kind": "image",
-          "video": "",
           "visible": true,
           "illustrative": true
         }
@@ -256,27 +206,22 @@
       "slug": "production-workshop",
       "cover": "/src/assets/workshop.png",
       "mk": {
-        "title": "Производствена работилница",
-        "description": ""
+        "title": "Производствена работилница"
       },
       "en": {
-        "title": "Production workshop",
-        "description": ""
+        "title": "Production workshop"
       },
       "visible": true,
       "media": [
         {
+          "kind": "image",
           "image": "/src/assets/workshop.png",
           "mk": {
-            "title": "Производствена работилница",
-            "description": ""
+            "title": "Производствена работилница"
           },
           "en": {
-            "title": "Production workshop",
-            "description": ""
+            "title": "Production workshop"
           },
-          "kind": "image",
-          "video": "",
           "visible": true,
           "illustrative": true
         }
