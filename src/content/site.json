@@ -94,12 +94,8 @@
   },
   "business": {
     "email": "contact@heralmetal.com.mk",
-    "mk": {
-      "note": "Привремена контактна адреса за оваа верзија на веб-страницата."
-    },
-    "en": {
-      "note": "Temporary contact address for this version of the website."
-    }
+    "mk": {},
+    "en": {}
   },
   "projects": [
     {

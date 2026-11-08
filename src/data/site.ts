@@ -31,7 +31,7 @@ export const copy = {
       ['Податоци во формуларот', 'Формуларот собира име, е-пошта, избрана услуга, опис на проектот и согласност за контакт. Компанијата, телефонскиот број и документот се незадолжителни. Податоците се користат за комуникација за вашето барање.'],
       ['Испраќање преку FormSubmit', 'Кога ќе го испратите формуларот, внесените податоци и избраниот документ се испраќаат до FormSubmit за обработка и доставување. Не прикачувајте чувствителни информации што не се потребни за барањето.'],
       ['Локално чување и следење', 'Оваа веб-страница нема аналитички скрипти или маркетиншки колачиња. Не ги зачувува внесените податоци во локалното складиште на прелистувачот. GitHub Pages и FormSubmit може да обработуваат технички податоци според своите политики.'],
-      ['Контакт', 'За прашања за вашето барање или податоците, користете ја контактната е-пошта. Контактната адреса е привремена и треба да биде заменета со потврдена деловна адреса пред јавна деловна употреба.'],
+      ['Контакт', 'За прашања за вашето барање или податоците, користете ја контактната е-пошта.'],
     ], notFound: 'Страницата не е пронајдена.', notFoundBody: 'Линкот можеби е променет. Продолжете од почетната страница или разгледајте ги нашите услуги.', backHome: 'Кон почетната',
   },
   en: {
@@ -47,7 +47,7 @@ export const copy = {
       ['Form information', 'The form collects your name, email, selected service, project description and consent to contact. Company, phone number and document are optional. This information is used to communicate about your request.'],
       ['Submission through FormSubmit', 'When you submit the form, your details and selected document are sent to FormSubmit for processing and delivery. Please avoid attaching sensitive information that is unnecessary for your request.'],
       ['Local storage and tracking', 'This website uses no analytics scripts or marketing cookies. It does not save your form details in browser local storage. GitHub Pages and FormSubmit may process technical information according to their own policies.'],
-      ['Contact', 'Use the contact email for questions about your request or information. This address is temporary and must be replaced with a verified business address before public business use.'],
+      ['Contact', 'Use the contact email for questions about your request or information.'],
     ], notFound: 'Page not found.', notFoundBody: 'The link may have changed. Continue from the home page or explore our services.', backHome: 'Back to home',
   },
 };

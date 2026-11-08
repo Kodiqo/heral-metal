@@ -9,6 +9,6 @@ const c = copy[lang];
 ---
 <div class="container standard-page">
   <PageHeading eyebrow={`HERAL METAL / ${c.contact}`} title={c.contactTitle} description={c.contactIntro} />
-  <section class="contact-grid"><div><h2>{c.emailUs}</h2><a href={`mailto:${contactEmail}`} class="contact-email">{contactEmail}</a><p class="muted">{c.emailNote}</p></div><div><h2>{c.ready}</h2><p>{c.readyBody}</p><Button href={route('quote', lang)}>{c.quote}</Button></div></section>
+  <section class="contact-grid"><div><h2>{c.emailUs}</h2><a href={`mailto:${contactEmail}`} class="contact-email">{contactEmail}</a>{c.emailNote && <p class="muted">{c.emailNote}</p>}</div><div><h2>{c.ready}</h2><p>{c.readyBody}</p><Button href={route('quote', lang)}>{c.quote}</Button></div></section>
   <section class="faq"><h2 class="section-title">{c.faq}</h2>{c.questions.map((question, i) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{c.answers[i]}</p></details>)}</section>
 </div>
